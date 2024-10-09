@@ -1,16 +1,16 @@
 {
   "name": "enseirb",
   "version": "1.0.0",
-  "main": "src/index.mjs",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
+    "api:clean": "docker stop feature-api; docker rmi feature/api",
     "api:build": "docker buildx build -f api/Dockerfile -t feature/api .",
-    "api:run": "docker run -d --name feature-api --network host feature/api",
-    "api:clean": "docker stop feature-api; docker rm feature-api; docker rmi feature/api:latest",
+    "api:run": "docker run -d --rm --name feature-api --network host feature/api",
     "api:all": "npm run api:clean; npm run api:build; npm run api:run",
+    "nginx:clean": "docker stop feature-nginx; docker rmi feature/nginx",
     "nginx:build": "docker buildx build -f nginx/Dockerfile -t feature/nginx ./nginx",
-    "nginx:run": "docker run -d --name feature-nginx --network host feature/nginx",
-    "nginx:clean": "docker stop feature-nginx; docker rm feature-nginx; docker rmi feature/nginx",
+    "nginx:run": "docker run -d --rm --name feature-nginx -p 8080:8080 feature/nginx",
     "nginx:all": "npm run nginx:clean; npm run nginx:build; npm run nginx:run"
   },
   "keywords": [],
@@ -18,7 +18,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.0",
     "fastify": "^5.0.0",
     "redis": "^4.7.0"
   }

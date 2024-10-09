@@ -1,9 +1,9 @@
-import { createServer } from "./server.mjs";
+import { createServer } from "./server.js";
 
 const server = createServer();
 
 try {
-  const address = await server.listen({ host: "0.0.0.0" });
+  const address = await server.listen({ host: "0.0.0.0", port: 3000 });
   console.log(`Server started on ${address}`);
 } catch (err) {
   console.log(err);
