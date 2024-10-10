@@ -4,4 +4,4 @@ COPY package.json package-lock.json ./
 RUN npm i --omit=dev
 COPY ./api/*.js ./src/
 ENTRYPOINT ["node"]
-CMD ["src/index.js"]
+CMD ["--env-file", "src/.env", "src/index.js"]
