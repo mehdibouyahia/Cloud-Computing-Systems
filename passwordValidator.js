@@ -1,5 +1,8 @@
 function isPasswordValid(password) {
-  return password.length >= 8 && /\d/.test(password);
+  const hasMinimumLength = password.length >= 8;
+  const hasNumber = /\d/.test(password);
+  const hasLetter = /[a-zA-Z]/.test(password);
+  return hasMinimumLength && hasNumber && hasLetter;
 }
 
 module.exports = isPasswordValid;
